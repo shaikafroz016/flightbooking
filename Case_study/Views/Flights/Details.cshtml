@@ -1,0 +1,111 @@
+﻿@model Case_study.Models.Flight
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Flight</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.source)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.source)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.destination)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.destination)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Airplane)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Airplane)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.departure)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.departure)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>
+        <div id="paypal-btn"></div>
+    </dl>
+</div>
+<p>
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+    }
+    @Html.ActionLink("Back to List", "Index")
+</p>
+@section Scripts{
+
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
+    <script>
+        let _total = @Html.Raw(Model.price);
+        paypal.Button.render({
+            //Configure environment
+            env: 'sandbox',
+            client: {
+                sandbox: 'ARNzAYF7qSkXdhaiPdIYTC2FcUzOpV5BhE4fgKvxSM2kT2gHtz1yoM8yXLvkLyq2RjZ9H0H7RwiLpAcH'
+            },
+            //Customize button
+            locale: 'en_US',
+            style: {
+                size: 'medium',
+                color: 'gold',
+                shape: 'pill'
+            },
+            commit: true,
+            //Set up a payment
+            payment: function (data, actions) {
+                return actions.payment.create({
+                    transactions: [{
+                        amount: {
+                            total: _total,
+                            currency: 'USD'
+                        }
+                    }]
+                });
+            },
+            //Execute the payment
+            onAuthorize: function (data, actions) {
+                return actions.payment.execute().then(function () {
+                    var url = '@Url.Action("Status", "Flights", new { })';
+                    window.location.href = url;
+                });
+            }
+        }, '#paypal-btn')
+    </script>
+}
