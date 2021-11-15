@@ -16,5 +16,7 @@ namespace Case_study.Models
         public DateTime departure { get; set; }
         public string type { get; set; }
         public int price { get; set; }
+        public string Araival { get; set; }
+        public string Duration { get; set; }
     }
 }

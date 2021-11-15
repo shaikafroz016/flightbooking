@@ -175,17 +175,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202111141534142_InitialCreate.cs" />
-    <Compile Include="Migrations\202111141534142_InitialCreate.Designer.cs">
-      <DependentUpon>202111141534142_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202111141825540_fullname.cs" />
-    <Compile Include="Migrations\202111141825540_fullname.Designer.cs">
-      <DependentUpon>202111141825540_fullname.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202111141835599_username.cs" />
-    <Compile Include="Migrations\202111141835599_username.Designer.cs">
-      <DependentUpon>202111141835599_username.cs</DependentUpon>
+    <Compile Include="Migrations\202111151003500_upd.cs" />
+    <Compile Include="Migrations\202111151003500_upd.Designer.cs">
+      <DependentUpon>202111151003500_upd.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -201,10 +193,12 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="CSS\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="JS\script.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -277,14 +271,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202111141534142_InitialCreate.resx">
-      <DependentUpon>202111141534142_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202111141825540_fullname.resx">
-      <DependentUpon>202111141825540_fullname.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202111141835599_username.resx">
-      <DependentUpon>202111141835599_username.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202111151003500_upd.resx">
+      <DependentUpon>202111151003500_upd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
