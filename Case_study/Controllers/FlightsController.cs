@@ -20,7 +20,9 @@ namespace Case_study.Controllers
         [AllowAnonymous]
         public ActionResult Search(string source,string des,DateTime dep)
         {
-            var res = db.Flights.Where(s => s.source == source && s.destination == des && s.departure == dep).ToList();
+            DateTime date_t = dep.Date;
+            string date = date_t.ToString("d");
+            var res = db.Flights.Where(s => s.source == source && s.destination == des && s.date == date).ToList();
             return View("Index",res);
         }
         [Authorize]
@@ -73,6 +75,9 @@ namespace Case_study.Controllers
         {
             if (ModelState.IsValid)
             {
+                DateTime date_t = flight.departure.Date;
+                string date = date_t.ToString("d");
+                flight.date = date;
                 db.Flights.Add(flight);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -106,6 +111,9 @@ namespace Case_study.Controllers
         {
             if (ModelState.IsValid)
             {
+                DateTime date_t = flight.departure.Date;
+                string date = date_t.ToString("d");
+                flight.date = date;
                 db.Entry(flight).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

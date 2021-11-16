@@ -13,7 +13,9 @@ namespace Case_study.Models
         public string source { get; set; }
         public string destination { get; set; }
         public string Airplane { get; set; }
+
         public DateTime departure { get; set; }
+        public string date { get; set; }
         public string type { get; set; }
         public int price { get; set; }
         public string Araival { get; set; }
