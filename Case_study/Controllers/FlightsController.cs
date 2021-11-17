@@ -23,7 +23,9 @@ namespace Case_study.Controllers
             DateTime date_t = dep.Date;
             string date = date_t.ToString("d");
             var res = db.Flights.Where(s => s.source == source && s.destination == des && s.date == date).ToList();
+            
             return View("Index",res);
+
         }
         [Authorize]
         public ActionResult Status()

@@ -1,9 +1,11 @@
 ﻿@model Case_study.Models.Flight
 
 @{
+    var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
     ViewBag.Title = "Details";
-    
+
 }
+<script type="text/javascript" src="~/JS/JavaScript.js"></script>
 <style>
     @@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bree+Serif&family=EB+Garamond:ital,wght@0,500;1,800&display=swap');
 
@@ -194,73 +196,107 @@ font-family: 'EB Garamond', serif;
 <h2>Details</h2>
 
 
+@*<script>
+    function CallLogicApp() {
+        let source = @Html.Raw(Model.source);
+        console.log(source);
+        let destination = @Html.Raw(Model.destination);
+        let Airplane = @Html.Raw(Model.Airplane);
+        let departure = @Html.Raw(Model.departure);
+        let type =@Html.Raw(Model.type);
+        let price = @Html.Raw(Model.price);
+
+
+        var bookingconfirmation =
+        {
+            source: source,
+            destination=destination,
+            Airplane=Airplane,
+            departure=departure,
+            type=type,
+            price=price
+        };
+        var url = "https://prod-61.eastus.logic.azure.com:443/workflows/0b75b563b00d4bbeb3241ae2f3ebc250/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=YTOHgOIVIGGWORRW0IMOLc51FA3aWs6E5cyqFnmS_CA";
+        var http = new XMLHttpRequest();
+        http.open('POST', url, true);
+        //Send the proper header information along with the request
+        http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        http.onreadystatechange = function () {//Call a function when the state changes.
+            if (http.readyState == 4 && http.status == 200) {
+                alert(http.responseText);
+            }
+        }
+        http.send(JSON.stringify(bookingconfirmation));
+
+</script>*@
 <div>
     <h4>Trip</h4>
     <hr />
-    
-<p>
-    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-    {
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
-        @Html.ActionLink("Delete", "Delete", new { id = Model.Id })
-    }
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+    <p>
+        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+        {
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+            @Html.ActionLink("Delete", "Delete", new { id = Model.Id })
+        }
+        @Html.ActionLink("Back to List", "Index")
+    </p>
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<div style="padding-top:25px">
-<div id="container">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <div style="padding-top:25px">
+        <div id="container">
 
-    <div class="product-details">
+            <div class="product-details">
 
-        <h1>Trip Details</h1>
-        <span class="hint-star star">
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star-o" aria-hidden="true"></i>
-        </span>
-        <p class="information">@Model.source <span style="padding-left:1.5px">TO</span> @Model.destination</p>
-        <p class="information">AT <span style="padding-left:1.5px"></span>@Model.departure</p>
-        <p class="information">Type<span style="padding-left:1.5px"></span> @Model.type</p>
-        <p class="information">Price <span style="padding-left:1.5px"></span>@Model.price INR</p>
+                <h1>Trip Details</h1>
+                <span class="hint-star star">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                </span>
+                <p class="information">@Model.source <span style="padding-left:1.5px">TO</span> @Model.destination</p>
+                <p class="information">AT <span style="padding-left:1.5px"></span>@Model.departure</p>
+                <p class="information">Type<span style="padding-left:1.5px"></span> @Model.type</p>
+                <p class="information">Price <span style="padding-left:1.5px"></span>@Model.price INR</p>
 
-        <div class="control">
+                <div class="control">
 
-            <div id="paypal-btn"></div>
+                    <div id="paypal-btn"  ></div>
+                    
+
+                </div>
+
+            </div>
+
+            <div class="product-image">
+
+                <img src="https://media.istockphoto.com/photos/passenger-airplane-taking-of-at-sunrise-picture-id1225840727?b=1&k=20&m=1225840727&s=170667a&w=0&h=dj8ErCdeGS_OG83VzmFZyulXwO62t1HdTYgSrkdbfGI=" alt="">
+
+
+                <div class="info">
+                    <h2> Description</h2>
+                    <ul>
+                        <li><strong>Plane : </strong>Boeing 777 </li>
+                        <li><strong>Engine : </strong>2 Engine</li>
+                        <li><strong>Capacity: </strong>250 people</li>
+                        <li><strong>Material: </strong>Eco-Friendly</li>
+
+                    </ul>
+                </div>
+            </div>
 
         </div>
-
-    </div>
-
-    <div class="product-image">
-
-        <img src="https://media.istockphoto.com/photos/passenger-airplane-taking-of-at-sunrise-picture-id1225840727?b=1&k=20&m=1225840727&s=170667a&w=0&h=dj8ErCdeGS_OG83VzmFZyulXwO62t1HdTYgSrkdbfGI=" alt="">
-
-
-        <div class="info">
-            <h2> Description</h2>
-            <ul>
-                <li><strong>Plane : </strong>Boeing 777 </li>
-                <li><strong>Engine : </strong>2 Engine</li>
-                <li><strong>Capacity: </strong>250 people</li>
-                <li><strong>Material: </strong>Eco-Friendly</li>
-
-            </ul>
-        </div>
-    </div>
-
-</div>
     </div>
 
 
-@section Scripts{
+    @section Scripts{
+        <script src="~/JS/JavaScript.js"></script>
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
 
-    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
-
-    <script>
+<script>
         let _total = @Html.Raw(Model.price);
         paypal.Button.render({
             //Configure environment
@@ -289,11 +325,16 @@ font-family: 'EB Garamond', serif;
             },
             //Execute the payment
             onAuthorize: function (data, actions) {
+
                 return actions.payment.execute().then(function () {
                     var url = '@Url.Action("Status", "Flights", new { })';
                     window.location.href = url;
                 });
             }
         }, '#paypal-btn')
-    </script>
+    
+</script>
+
+
+
 }
